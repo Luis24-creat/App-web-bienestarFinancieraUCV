@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil - UCV Bienestar Financiero</title>
+  <link rel="stylesheet" href="../css/perfil.css">
+</head>
+<body>
+  <!-- 🔵 Barra superior -->
+  <header class="topbar">
+    <h1>UCV Bienestar Financiero</h1>
+    <div class="user-info">
+      <span id="userEmail">Cargando...</span>
+      <button id="logoutBtn" class="btn-logout">Cerrar sesión</button>
+    </div>
+  </header>
+  <!-- 🟢 Menú lateral -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-content">
+      <img src="../assets/logo_ucv.png" alt="Logo UCV" class="sidebar-logo">
+      <nav>
+        <ul>
+          <li><a href="dashboard.html">🏠 Dashboard</a></li>
+          <li><a href="becas.html">🎓 Becas</a></li>
+          <li><a href="metas.html">💰 Metas</a></li>
+          <li><a href="transacciones.html">💳 Transacciones</a></li>
+          <li><a href="perfil.html" class="active">👤 Perfil</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- 🔵 Contenido principal -->
+  <main class="main-content">
+    <header><h1>Mi Perfil</h1></header>
+
+    <section class="perfil-container">
+      <form id="formPerfil">
+        <label>Nombre completo</label>
+        <input type="text" id="nombre" disabled>
+
+        <label>Correo</label>
+        <input type="email" id="correo" readonly>
+
+        <label>Carrera</label>
+        <input type="text" id="carrera" disabled>
+
+        <label>Campus</label>
+        <input type="text" id="campus" disabled>
+
+        <label>Teléfono</label>
+        <input type="text" id="telefono" disabled>
+
+        <label>Sexo</label>
+        <input type="text" id="sexo" disabled>
+
+        <label>Fecha de nacimiento</label>
+        <input type="text" id="fechaNacimiento" disabled>
+
+        <div class="perfil-botones">
+          <button type="button" id="editarBtn" class="btn">Editar</button>
+          <button type="submit" id="guardarBtn" class="btn" style="display: none;">Guardar cambios</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="../js/perfil.js"></script>
+</body>
+</html>

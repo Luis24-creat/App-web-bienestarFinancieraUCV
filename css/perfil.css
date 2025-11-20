@@ -1,0 +1,263 @@
+/* ======================================
+   VARIABLES GLOBALES
+====================================== */
+:root {
+  --color-principal: #003366;
+  --color-secundario: #0059b3;
+  --color-exito: #00cc66;
+  --color-blanco: #ffffff;
+  --color-gris: #f4f4f4;
+  --color-texto: #333;
+  --transicion: all 0.3s ease;
+  --sombra: 0 8px 25px rgba(0, 0, 0, 0.15);
+  --fuente: "Poppins", sans-serif;
+}
+
+/* ======================================
+   ESTILOS GENERALES
+====================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--fuente);
+}
+
+body {
+  background: linear-gradient(135deg, var(--color-principal), var(--color-secundario));
+  min-height: 100vh;
+  display: flex;
+  color: var(--color-texto);
+}
+
+/* ======================================
+   BARRA SUPERIOR
+====================================== */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 220px;
+  right: 0;
+  background-color: var(--color-blanco);
+  color: var(--color-principal);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: var(--sombra);
+  z-index: 1000;
+}
+
+.topbar h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info span {
+  font-weight: 500;
+}
+
+.btn-logout {
+  background-color: var(--color-principal);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transicion);
+}
+
+.btn-logout:hover {
+  background-color: #002b5c;
+  transform: translateY(-2px);
+}
+
+/* ======================================
+   MENÚ LATERAL
+====================================== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  background-color: var(--color-principal);
+  color: var(--color-blanco);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+  box-shadow: var(--sombra);
+}
+
+.sidebar-logo {
+  width: 100px;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  width: 100%;
+}
+
+.sidebar nav ul li {
+  width: 100%;
+}
+
+.sidebar nav ul li a {
+  display: block;
+  color: var(--color-blanco);
+  text-decoration: none;
+  padding: 0.8rem 1.2rem;
+  transition: var(--transicion);
+  font-weight: 500;
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+  background-color: var(--color-secundario);
+  border-left: 4px solid var(--color-exito);
+}
+
+/* ======================================
+   CONTENIDO PRINCIPAL
+====================================== */
+.main-content {
+  margin-left: 220px;
+  padding: 6rem 2rem 2rem;
+  width: 100%;
+}
+
+.main-content header h1 {
+  color: var(--color-principal);
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* ======================================
+   PERFIL - FORMULARIO
+====================================== */
+.perfil-container {
+  background: var(--color-blanco);
+  border-radius: 16px;
+  box-shadow: var(--sombra);
+  padding: 2rem;
+  max-width: 500px;
+  margin: auto;
+  animation: fadeIn 0.7s ease;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
+  font-weight: 500;
+  color: var(--color-principal);
+}
+
+input {
+  padding: 0.9rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: var(--transicion);
+}
+
+input:focus {
+  border-color: var(--color-secundario);
+  box-shadow: 0 0 5px rgba(0, 85, 204, 0.4);
+}
+
+/* ======================================
+   BOTONES DE PERFIL
+====================================== */
+.perfil-botones {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  background-color: var(--color-principal);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 10px;
+  padding: 0.9rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transicion);
+  letter-spacing: 0.5px;
+}
+
+.btn:hover {
+  background-color: #002b5c;
+  transform: translateY(-2px);
+}
+
+/* ======================================
+   ANIMACIONES
+====================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ======================================
+   RESPONSIVE DESIGN
+====================================== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0.5rem;
+    position: relative;
+  }
+
+  .sidebar-logo {
+    width: 60px;
+  }
+
+  .sidebar nav ul {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .sidebar nav ul li a {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .topbar {
+    left: 0;
+    padding: 0.8rem 1rem;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding-top: 5.5rem;
+  }
+
+  .perfil-container {
+    padding: 1.5rem;
+  }
+}

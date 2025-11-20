@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UCV Bienestar Financiero - Dashboard</title>
+
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+ 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script type="module" src="/JS/dashboard.js" defer></script>
+  <script type="module" src="/JS/IA.JS" defer></script>
+</head>
+<body>
+
+  <!-- toggles CSS-only -->
+  <input type="checkbox" id="navToggle" class="toggle-input" />
+  <input type="checkbox" id="chatToggle" class="toggle-input" />
+
+  <!-- 🔵 Barra superior -->
+  <header class="topbar">
+    <label for="navToggle" class="menu-toggle" aria-label="Abrir menú">☰</label>
+
+    <h1>UCV Bienestar Financiero</h1>
+    <div class="user-info">
+      <span id="userEmail">Cargando...</span>
+      <button id="logoutBtn">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <!-- 🟢 Menú lateral -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-content">
+      <img src="/assets/icono de Bienestar Finaciera.png" alt="Logo UCV" class="sidebar-logo">
+      <nav>
+        <ul>
+          <li><a href="/Html/dashboard.html" class="active">🏠 Dashboard</a></li>
+          <li><a href="/Html/presupuesto.html">📘 Presupuesto</a></li>
+          <li><a href="/Html/educacion.html">🎓 Educación Financiera</a></li>
+          <li><a href="/Html/metas.html">💰 Ahorro y Metas</a></li>
+          <li><a href="/Html/finanzas.html">📊 Finanzas Inteligentes</a></li>
+          <li><a href="/Html/beneficios.html">🏷️ Beneficios</a></li>
+          <li><a href="/Html/asesoria.html">🧑‍🏫 Asesoría</a></li>
+          <li><a href="/Html/perfil.html">👤 Perfil</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- 🟣 Contenido principal -->
+  <main class="dashboard-content">
+
+    <!-- ✔ Nuevo mensaje adaptado -->
+    <section class="welcome">
+      <h2>Tu bienestar financiero en un solo lugar</h2>
+      <p>Controla tus gastos, organiza tus metas, aprende finanzas y aprovecha beneficios exclusivos.</p>
+    </section>
+
+    <!-- ✔ Nuevas tarjetas principales -->
+    <section class="stats">
+      <div class="card">
+        <h3>💰 Presupuesto del mes</h3>
+        <p>S/ 1,250 Disponible</p>
+      </div>
+
+      <div class="card">
+    <h3>📥 Ingresos del mes</h3>
+    <p>S/ 300</p>
+  </div>
+
+       <div class="card">
+      <h3>💸 Gastos del mes</h3>
+       <p>S/ 820.00</p>
+  </div>
+
+      <div class="card">
+        <h3>💳 Gastos registrados</h3>
+        <p>14 movimientos</p>
+      </div>
+
+      <div class="card">
+        <h3>💰 Metas activas</h3>
+        <p>2 en progreso</p>
+      </div>
+    </section>
+
+    <!-- 📊 GRÁFICOS Actualizados para vista de usuario -->
+    <section class="charts">
+      <div class="chart-card">
+        <h3>Presupuesto: Ingresos vs Gastos</h3>
+        <canvas id="chartTransacciones"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <h3>Progreso de tus metas de ahorro</h3>
+        <canvas id="chartMetas"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <h3>Distribución de tus gastos</h3>
+        <canvas id="chartCategorias"></canvas>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 💬 Burbuja del Chat IA -->
+  <label for="chatToggle" class="chat-bubble" aria-label="Abrir chat">💬</label>
+
+  <!-- 💬 Caja del Chat IA -->
+  <div class="chat-box" id="chatBox" role="dialog" aria-hidden="true">
+    <div class="chat-header">
+      <h4>Asistente Financiero IA</h4>
+      <label for="chatToggle" class="close-chat" aria-label="Cerrar chat">✖</label>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="ia-message">👋 ¡Hola! Estoy aquí para ayudarte a mejorar tu bienestar financiero.</div>
+    </div>
+
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
+      <button id="sendBtn" type="button">Enviar</button>
+    </div>
+  </div>
+
+</body>
+</html>

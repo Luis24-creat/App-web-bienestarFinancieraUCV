@@ -1,0 +1,149 @@
+/* ======== ESTILO GENERAL ======== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #004080, #0078d7);
+}
+
+/* ======== CONTENEDOR ======== */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+/* ======== TARJETA DEL FORMULARIO ======== */
+.card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px 35px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ======== LOGO ======== */
+.logo {
+  width: 120px;
+  display: block;
+  margin: 0 auto 15px auto;
+  transition: transform 0.3s;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+/* ======== TÍTULO ======== */
+h1 {
+  text-align: center;
+  color: #003366;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+}
+
+/* ======== FORMULARIO ======== */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+input,
+select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: #0078d7;
+  box-shadow: 0 0 6px rgba(0, 120, 215, 0.3);
+}
+
+/* ======== BOTÓN ======== */
+.btn {
+  background: linear-gradient(135deg, #0078d7, #005bb5);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #005bb5, #004080);
+  transform: translateY(-2px);
+}
+
+/* ======== TEXTO INFERIOR ======== */
+p {
+  text-align: center;
+  margin-top: 15px;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+a {
+  color: #0078d7;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ======== MENSAJE ======== */
+#mensaje {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #004080;
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 480px) {
+  .card {
+    padding: 30px 25px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .logo {
+    width: 100px;
+  }
+}

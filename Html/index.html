@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UCV Bienestar Financiero - Iniciar Sesión</title>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <img src="assets/logo_ucv.png" alt="Logo UCV" class="logo">
+
+      <h1>UCV Bienestar Financiero</h1>
+      <p class="subtitulo">Tu espacio para gestionar ahorros, becas y metas personales</p>
+
+      <form id="loginForm">
+        <label for="email">Correo institucional</label>
+        <input type="email" id="email" placeholder="ejemplo@ucv.edu.pe" required>
+
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" placeholder="********" required>
+
+        <button type="submit" class="btn">Iniciar Sesión</button>
+      </form>
+
+      <p>¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+      <p id="mensaje"></p>
+    </section>
+  </main>
+
+  <script type="module" src="/JS/index.js"></script>
+</body>
+</html>

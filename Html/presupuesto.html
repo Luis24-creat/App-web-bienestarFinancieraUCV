@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presupuesto Personal - UCV Bienestar Financiero</title>
+
+  <link rel="stylesheet" href="/css/presupuesto.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script type="module" src="/JS/presupuesto.js" ></script>
+  <script type="module" src="/JS/IA.JS" ></script>
+</head>
+<body>
+
+  <!-- Toggles -->
+  <input type="checkbox" id="navToggle" class="toggle-input" />
+  <input type="checkbox" id="chatToggle" class="toggle-input" />
+
+  <!-- 🔵 Barra superior -->
+  <header class="topbar">
+    <label for="navToggle" class="menu-toggle">☰</label>
+    <h1>Presupuesto Personal</h1>
+
+    <div class="user-info">
+      <span id="userEmail">Cargando...</span>
+      <button id="logoutBtn">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <!-- 🟢 Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-content">
+      <img src="/assets/icono de Bienestar Finaciera.png" class="sidebar-logo" alt="Logo UCV">
+
+      <nav>
+        <ul>
+          <li><a href="/Html/dashboard.html">🏠 Dashboard</a></li>
+          <li><a href="/Html/presupuesto.html" class="active">💰 Presupuesto Personal</a></li>
+          <li><a href="/Html/educacion.html">🎓 Educación Financiera</a></li>
+          <li><a href="/Html/metas.html">🎯 Ahorro y Metas</a></li>
+          <li><a href="/Html/inteligentes.html">🧮 Finanzas Inteligentes</a></li>
+          <li><a href="/Html/beneficios.html">🏷 Beneficios</a></li>
+          <li><a href="/Html/asesoria.html">📞 Asesoría</a></li>
+          <li><a href="/Html/perfil.html">⚙️ Configuración</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- 🟣 Contenido principal -->
+  <main class="presupuesto-content">
+
+    <section class="titulo">
+      <h2>Control de tu Presupuesto</h2>
+      <p>Registra tus ingresos, gastos y visualiza tu balance mensual.</p>
+    </section>
+
+    <!-- 🔹 RESUMEN DEL MES -->
+    <section class="resumen">
+      <div class="card ingreso">
+        <h3>Total Ingresos</h3>
+        <p class="monto" id="totalIngresos">S/ 0.00</p>
+      </div>
+
+      <div class="card gasto">
+        <h3>Total Gastos</h3>
+        <p class="monto" id="totalGastos">S/ 0.00</p>
+      </div>
+
+      <div class="card balance">
+        <h3>Balance Restante</h3>
+        <p class="monto" id="balanceRestante">S/ 0.00</p>
+      </div>
+    </section>
+
+    <!-- 🔹 FORMULARIOS DE REGISTRO -->
+    <section class="formularios">
+
+      <!-- INGRESO -->
+      <div class="form-card">
+        <h3>Registrar Ingreso</h3>
+        <input type="text" id="ingresoDescripcion" placeholder="Descripción">
+        <input type="number" id="ingresoMonto" placeholder="Monto">
+        <button id="btnAgregarIngreso">Agregar Ingreso</button>
+      </div>
+
+      <!-- GASTO -->
+      <div class="form-card">
+        <h3>Registrar Gasto</h3>
+        <input type="text" id="gastoDescripcion" placeholder="Descripción">
+        <input type="number" id="gastoMonto" placeholder="Monto">
+        <button id="btnAgregarGasto">Agregar Gasto</button>
+      </div>
+
+    </section>
+
+    <!-- 🔹 LISTADOS -->
+    <section class="listados">
+
+      <div class="lista">
+        <h3>Ingresos registrados</h3>
+        <ul id="listaIngresos"></ul>
+      </div>
+
+      <div class="lista">
+        <h3>Gastos registrados</h3>
+        <ul id="listaGastos"></ul>
+      </div>
+
+    </section>
+
+    <!-- 🔹 GRÁFICOS -->
+    <section class="charts">
+      <div class="chart-card">
+        <h3>Ingresos vs Gastos</h3>
+        <canvas id="graficoPresupuesto"></canvas>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 💬 Chat IA -->
+  <label for="chatToggle" class="chat-bubble">💬</label>
+
+  <div class="chat-box" id="chatBox">
+    <div class="chat-header">
+      <h4>Asistente Financiero IA</h4>
+      <label for="chatToggle" class="close-chat">✖</label>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="ia-message">👋 ¡Hola! ¿Necesitas ayuda con tu presupuesto?</div>
+    </div>
+
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Escribe tu pregunta...">
+      <button id="sendBtn">Enviar</button>
+    </div>
+  </div>
+
+</body>
+</html>
