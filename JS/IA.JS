@@ -39,7 +39,6 @@ async function enviar() {
 
   const respuesta = await enviarMensajeGemini(mensaje);
 
-  // Elimina loader
   const loader = [...chatMessages.querySelectorAll(".ia-message")].find(m =>
     m.textContent.includes("⏳")
   );
@@ -83,51 +82,27 @@ function agregarMensajeIA(texto) {
 }
 
 // ===========================================
-//   IA: GOOGLE GEMINI
+//   IA USANDO TU BACKEND (SEGURO)
 // ===========================================
 async function enviarMensajeGemini(mensajeUsuario) {
-  const apiKey = "AIzaSyAd1JeRbL0dPeH3MDUn3fIXQGc383hermA";
-
-  const endpoint =
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-  const contexto = `
-Eres un asistente virtual del sistema UCV Bienestar Financiero.
-Ayuda con becas, ahorro, transacciones y finanzas personales.
-Responde de forma clara, amable y útil.
-`;
-
   try {
-    const response = await fetch(endpoint, {
+    const response = await fetch("http://localhost:3000/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [
-          {
-            parts: [
-              { text: contexto + "\nUsuario: " + mensajeUsuario }
-            ]
-          }
-        ]
-      }),
+      body: JSON.stringify({ mensaje: mensajeUsuario })
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("❌ Error API:", errorText);
-      return `⚠️ Error ${response.status}: No se pudo obtener respuesta.`;
-    }
-
     const data = await response.json();
-    console.log("🔍 Respuesta IA:", data);
 
-    const respuestaIA = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    const respuestaIA =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "⚠️ La IA no respondió.";
 
-    return respuestaIA || "⚠️ La IA no respondió.";
+    return respuestaIA;
 
   } catch (error) {
-    console.error("❌ Error de conexión:", error);
-    return "❌ No se pudo conectar con la IA.";
+    console.error("❌ Error conectando al servidor:", error);
+    return "❌ No se pudo conectar con el servidor.";
   }
 }
 

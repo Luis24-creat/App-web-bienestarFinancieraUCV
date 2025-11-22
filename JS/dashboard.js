@@ -3,7 +3,7 @@ import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/
 
 const emailDisplay = document.getElementById("userEmail");
 const sidebar = document.getElementById("sidebar");
-const menuToggle = document.getElementById("menuToggle");
+const menuToggle = document.querySelector(".menu-toggle");
 const logoutBtn = document.getElementById("logoutBtn");
 
 // Verificar usuario activo
