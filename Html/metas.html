@@ -6,30 +6,41 @@
   <title>Metas de Ahorro - UCV Bienestar Financiero</title>
 
   <link rel="stylesheet" href="/css/metas.css">
+  <link rel="stylesheet" href="/css/dashboard.css" />
 </head>
+<!-- 🔵 HEADER -->
+  <header class="topbar">
+    <label for="navToggle" class="menu-toggle" aria-label="Abrir menú">☰</label>
+
+    <h1>Metas</h1>
+    <div class="user-info">
+      <span id="userEmail">Cargando...</span>
+      <button id="logoutBtn">Cerrar sesión</button>
+    </div>
+  </header>
+
 <body>
 
   <!-- 🟢 SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-content">
-      <img src="/assets/logo_ucv.png" alt="Logo UCV" class="sidebar-logo">
+      <img src="/assets/icono de Bienestar Finaciera.png" alt="Logo UCV" class="sidebar-logo">
       <nav>
         <ul>
           <li><a href="/Html/dashboard.html">🏠 Dashboard</a></li>
-          <li><a href="/Html/becas.html">🎓 Becas</a></li>
-          <li><a href="/Html/metas.html" class="active">💰 Metas</a></li>
-          <li><a href="/Html/transacciones.html">💳 Transacciones</a></li>
-          <li><a href="/Html/perfil.html">👤 Perfil</a></li>
+          <li><a href="/Html/presupuesto.html">💰 Presupuesto y Transacciones</a></li>
+          <li><a href="/Html/educacion.html">🎓 Educación Financiera</a></li>
+          <li><a href="/Html/metas.html"class="active">🎯Metas</a></li>
+          <li><a href="/Html/inteligentes.html">🧮 Finanzas Inteligentes</a></li>
+          <li><a href="/Html/beneficios.html" >🏷 Beneficios y Descuentos</a></li>
+          <li><a href="/Html/asesoria.html">📞 Asesoría</a></li>
+          <li><a href="/Html/perfil.html">⚙️ Configuración</a></li>
         </ul>
       </nav>
     </div>
   </aside>
 
-  <!-- 🔵 HEADER -->
-  <header class="top-header">
-    <h1>Metas de Ahorro</h1>
-    <button id="modoToggle">🌗 Cambiar Modo</button>
-  </header>
+  
 
   <!-- =============================
        🔴 SECCIÓN PRINCIPAL
@@ -92,28 +103,22 @@
           VISTA DETALLADA DE UNA META ESPECÍFICA
     ============================================== -->
     <section id="vistaDetalle" style="display: none;">
+  <button id="btnRegresar">← Regresar</button>
 
-      <button id="btnRegresar">← Regresar</button>
+  <h2 id="detalleTitulo">Meta</h2>
+  <p id="detalleObjetivo">Objetivo:</p>
+  <p id="detalleProgreso">Progreso:</p>
 
-      <h2 id="detalleTitulo">Meta</h2>
+  <!-- Barra de progreso -->
+  <div class="barra-progreso">
+    <div id="detalleBarra"></div>
+  </div>
 
-      <p id="detalleObjetivo">Objetivo:</p>
-      <p id="detalleProgreso">Progreso:</p>
+  <!-- Historial de movimientos -->
+  <h3>Historial de movimientos</h3>
+  <ul id="listaHistorial"></ul>
+</section>
 
-      <!-- Barra -->
-      <div class="barra-progreso">
-        <div id="detalleBarra"></div>
-      </div>
-
-      <!-- Añadir monto -->
-      <h3>Añadir monto</h3>
-
-      <input type="number" id="montoAgregar" placeholder="Monto a añadir">
-      <button id="btnAgregarMonto">Agregar</button>
-
-      <!-- Historial Firebase -->
-      <h3>Historial de movimientos</h3>
-      <ul id="listaHistorial"></ul>
 
     </section>
 

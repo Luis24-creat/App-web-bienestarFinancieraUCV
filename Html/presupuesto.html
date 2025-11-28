@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Presupuesto Personal - UCV Bienestar Financiero</title>
+  <title>Presupuesto y Transacciones - UCV Bienestar Financiero</title>
 
   <link rel="stylesheet" href="/css/presupuesto.css">
   <link rel="stylesheet" href="/css/dashboard.css">
@@ -12,21 +12,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <script type="module" src="/JS/presupuesto.js" ></script>
-  <script type="module" src="/JS/IA.JS" ></script>
+  <script type="module" src="/JS/presupuesto.js" defer></script>
+  <script type="module" src="/JS/IA.JS" defer></script>
 </head>
 <body>
 
-  <!-- Toggles -->
   <input type="checkbox" id="navToggle" class="toggle-input" />
   <input type="checkbox" id="chatToggle" class="toggle-input" />
 
-  <!-- 🔵 Barra superior -->
   <header class="topbar">
     <label for="navToggle" class="menu-toggle">☰</label>
-    <h1>Presupuesto Personal</h1>
+    <h1>Presupuesto y Transacciones</h1> 
 
     <div class="user-info">
       <span id="userEmail">Cargando...</span>
@@ -34,17 +32,15 @@
     </div>
   </header>
 
-  <!-- 🟢 Sidebar -->
   <aside class="sidebar">
     <div class="sidebar-content">
       <img src="/assets/icono de Bienestar Finaciera.png" class="sidebar-logo" alt="Logo UCV">
-
       <nav>
         <ul>
           <li><a href="/Html/dashboard.html">🏠 Dashboard</a></li>
-          <li><a href="/Html/presupuesto.html" class="active">💰 Presupuesto Personal</a></li>
+          <li><a href="/Html/presupuesto.html" class="active">💰 Presupuesto y Transacciones</a></li>
           <li><a href="/Html/educacion.html">🎓 Educación Financiera</a></li>
-          <li><a href="/Html/metas.html">🎯 Ahorro y Metas</a></li>
+          <li><a href="/Html/metas.html">🎯 Metas</a></li>
           <li><a href="/Html/inteligentes.html">🧮 Finanzas Inteligentes</a></li>
           <li><a href="/Html/beneficios.html">🏷 Beneficios</a></li>
           <li><a href="/Html/asesoria.html">📞 Asesoría</a></li>
@@ -54,79 +50,72 @@
     </div>
   </aside>
 
-  <!-- 🟣 Contenido principal -->
   <main class="presupuesto-content">
 
     <section class="titulo">
-      <h2>Control de tu Presupuesto</h2>
-      <p>Registra tus ingresos, gastos y visualiza tu balance mensual.</p>
+      <h2>Simulación de Transacciones y Flujo de Efectivo</h2>
+      <p>Registra tus ingresos y observa cómo los gastos automáticos afectan tu balance mensual.</p>
     </section>
 
-    <!-- 🔹 RESUMEN DEL MES -->
     <section class="resumen">
       <div class="card ingreso">
         <h3>Total Ingresos</h3>
         <p class="monto" id="totalIngresos">S/ 0.00</p>
       </div>
-
       <div class="card gasto">
         <h3>Total Gastos</h3>
         <p class="monto" id="totalGastos">S/ 0.00</p>
       </div>
-
       <div class="card balance">
         <h3>Balance Restante</h3>
         <p class="monto" id="balanceRestante">S/ 0.00</p>
       </div>
     </section>
 
-    <!-- 🔹 FORMULARIOS DE REGISTRO -->
     <section class="formularios">
-
-      <!-- INGRESO -->
       <div class="form-card">
         <h3>Registrar Ingreso</h3>
-        <input type="text" id="ingresoDescripcion" placeholder="Descripción">
-        <input type="number" id="ingresoMonto" placeholder="Monto">
-        <button id="btnAgregarIngreso">Agregar Ingreso</button>
+        <input type="text" id="ingresoDescripcion" placeholder="Descripción" class="styled-input">
+        <input type="number" id="ingresoMonto" placeholder="Monto" class="styled-input">
+        <select id="ingresoOrigen" class="styled-input"> 
+          <option value="">-- Origen del Ingreso --</option>
+          <option value="banco">🏦 Depósito Bancario</option>
+          <option value="efectivo">💵 Efectivo</option>
+          <option value="transferencia">➡️ Transferencia</option>
+        </select>
+        <button id="btnAgregarIngreso" class="btn-income">Agregar Ingreso</button>
       </div>
 
-      <!-- GASTO -->
       <div class="form-card">
-        <h3>Registrar Gasto</h3>
-        <input type="text" id="gastoDescripcion" placeholder="Descripción">
-        <input type="number" id="gastoMonto" placeholder="Monto">
-        <button id="btnAgregarGasto">Agregar Gasto</button>
+        <h3>Gastos Automáticos</h3>
+        <p>
+          Los gastos aparecerán aquí automáticamente cuando el administrador los registre.
+          Ejemplos: seguro estudiantil, trámites, pagos internos, etc.
+        </p>
       </div>
-
     </section>
 
-    <!-- 🔹 LISTADOS -->
     <section class="listados">
-
       <div class="lista">
-        <h3>Ingresos registrados</h3>
+        <h3>Transacciones de Ingresos</h3>
         <ul id="listaIngresos"></ul>
       </div>
 
       <div class="lista">
-        <h3>Gastos registrados</h3>
+        <h3>Transacciones de Gastos</h3>
         <ul id="listaGastos"></ul>
       </div>
-
     </section>
 
-    <!-- 🔹 GRÁFICOS -->
     <section class="charts">
       <div class="chart-card">
-        <h3>Ingresos vs Gastos</h3>
+        <h3>Flujo de Caja: Ingresos vs Gastos</h3>
         <canvas id="graficoPresupuesto"></canvas>
       </div>
     </section>
 
   </main>
 
-  <!-- 💬 Chat IA -->
   <label for="chatToggle" class="chat-bubble">💬</label>
 
   <div class="chat-box" id="chatBox">
@@ -142,6 +131,14 @@
     <div class="chat-input">
       <input type="text" id="userInput" placeholder="Escribe tu pregunta...">
       <button id="sendBtn">Enviar</button>
+    </div>
+  </div>
+
+  <!-- NOTIFICACIÓN CORREGIDA -->
+  <div id="notificacionPago" class="notificacion oculto">
+    <div class="notif-box">
+      <div class="notif-icon">💸</div>
+      <p id="notificacionTexto">Procesando transacción...</p>
     </div>
   </div>
 

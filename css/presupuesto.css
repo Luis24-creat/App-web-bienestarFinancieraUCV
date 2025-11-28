@@ -1,0 +1,172 @@
+/* ========================================== */
+/* Presupuesto Personal - UCV Bienestar Financiero */
+/* Responsive optimizado para móviles */
+/* ========================================== */
+
+/* Variables */
+:root {
+  --sidebar-width: 260px;
+  --header-h: 64px;
+  --bg: #071029;
+  --accent-1: #6EE7B7;
+  --accent-2: #60A5FA;
+  --muted: #9CA3AF;
+  --radius: 12px;
+  --shadow: 0 10px 30px rgba(2,6,23,0.6);
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+}
+
+/* Base */
+* { box-sizing: border-box; }
+html, body { height: 100%;
+  margin: 0;
+  padding-top: calc(var(--header-h) - 110px); }
+body {
+  background:
+    radial-gradient(900px 400px at 10% 10%, rgba(96,165,250,0.03), transparent 12%),
+    linear-gradient(180deg, var(--bg) 0%, #081026 100%);
+  color: #E6EEF8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Header */
+.topbar {
+  position: fixed; left: 0; right: 0; top: 0; height: var(--header-h);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+  backdrop-filter: blur(6px);
+  z-index: 120;
+  box-shadow: 0 6px 30px rgba(2,6,23,0.55);
+}
+.topbar h1 { margin: 0; font-size: 18px; font-weight: 700; }
+.topbar .user-info { display: flex; gap: 8px; align-items: center; }
+.topbar #logoutBtn {
+  background: transparent; border: 1px solid rgba(255,255,255,0.04);
+  padding: 6px 10px; border-radius: 10px; color: var(--muted); cursor: pointer;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed; left: 16px; top: calc(var(--header-h) + 12px); bottom: 16px;
+  width: var(--sidebar-width); padding: 14px; display: flex; flex-direction: column; gap: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+  border-radius: 12px; border: 1px solid rgba(255,255,255,0.02);
+  box-shadow: var(--shadow); backdrop-filter: blur(6px); z-index: 110; transition: transform .28s, opacity .2s;
+  overflow: auto;
+}
+.sidebar-logo { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; box-shadow: 0 8px 30px rgba(96,165,250,0.06); }
+.sidebar nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.sidebar nav a {
+  display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 10px;
+  color: var(--muted); text-decoration: none; font-weight: 600; transition: all .16s;
+}
+.sidebar nav a:hover { color: var(--accent-2); transform: translateX(6px); }
+.sidebar nav a.active {
+  color: var(--accent-2);
+  background: linear-gradient(90deg, rgba(96,165,250,0.06), rgba(110,231,183,0.03));
+  box-shadow: inset 4px 0 0 0 rgba(96,165,250,0.12);
+}
+
+/* Main Content */
+.presupuesto-content {
+  margin-left: calc(var(--sidebar-width) + 32px);
+  padding: 20px 28px 60px 28px;
+  min-height: calc(100vh - var(--header-h));
+  transition: margin .22s ease;
+}
+
+
+/* Cards / Grids */
+.resumen, .formularios, .listados, .charts { display: grid; gap: 14px; margin-top: 16px; }
+.resumen { grid-template-columns: repeat(3,1fr); }
+.formularios { grid-template-columns: 1fr 1fr; }
+.listados { grid-template-columns: 1fr 1fr; }
+.charts { grid-template-columns: 2fr 1fr; }
+
+.card, .form-card, .chart-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.02);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(2,6,23,0.5);
+  transition: transform .18s;
+}
+.card:hover, .form-card:hover, .chart-card:hover { transform: translateY(-4px); }
+.card h3, .form-card h3, .chart-card h3 { margin: 0; font-size: 13px; color: var(--muted); }
+.card p, .form-card p, .chart-card p { margin: 12px 0 0; font-weight: 800; font-size: 18px; color: #fff; }
+
+/* Chat bubble & panel */
+.chat-bubble {
+  position: fixed; right: 18px; bottom: 18px; width: 60px; height: 60px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; font-size: 20px;
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color: #012; box-shadow: 0 16px 50px rgba(96,165,250,0.12); z-index: 140; cursor: pointer; transition: transform .16s;
+}
+.chat-bubble:hover { transform: translateY(-6px); }
+.chat-box {
+  position: fixed; right: 18px; bottom: 88px; width: 360px; border-radius: 12px; padding: 0; overflow: hidden;
+  background: linear-gradient(180deg,#071229,#071a2e); border:1px solid rgba(255,255,255,0.02);
+  box-shadow:0 20px 60px rgba(2,6,23,0.6);
+  opacity:0; transform:translateY(12px); pointer-events:none; transition: all .18s; z-index:135;
+}
+
+/* Notificación de pago centrada */
+.notificacion {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;           /* Centrado horizontal */
+  transform: translateX(-50%) translateY(20px); /* Centrado + animación */
+  background: #003366;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  font-size: 16px;
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 9999;
+}
+
+.notificacion.mostrar {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0); /* Animación hacia arriba */
+}
+
+.notificacion.oculto {
+  display: none;
+}
+
+
+/* Mobile-first adjustments */
+@media (max-width:760px){
+  :root{ --header-h:56px; }
+  body{padding-top:var(--header-h);}
+  .topbar h1{font-size:16px}
+  .sidebar{width:84%;max-width:360px;transform:translateX(-420px);opacity:0}
+  .sidebar.open{transform:translateX(0);opacity:1;pointer-events:auto}
+  .presupuesto-content{margin-left:20px;padding:16px 14px 80px 14px}
+  .resumen{grid-template-columns:1fr}
+  .formularios{grid-template-columns:1fr}
+  .listados{grid-template-columns:1fr}
+  .charts{grid-template-columns:1fr}
+  .chart-card canvas{height:220px !important}
+  .chat-box{
+    right:8px;left:8px;bottom:8px;width:auto;border-radius:12px;height:56vh;max-height:76vh;
+    display:flex;flex-direction:column;
+  }
+  .chat-messages{max-height:calc(56vh - 140px)}
+  .chat-bubble{right:14px;bottom:14px;width:56px;height:56px}
+}
+
+/* Extra narrow phones */
+@media (max-width:420px){
+  .sidebar{width:92%}
+  .chat-box{height:62vh}
+  .chat-messages{max-height:calc(62vh - 140px)}
+  .card p, .form-card p{font-size:16px}
+  .topbar h1{font-size:15px}
+  .chat-input input{padding:12px}
+}

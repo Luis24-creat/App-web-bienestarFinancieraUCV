@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educacion</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+ 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script type="module" src="/JS/dashboard.js" defer></script>
+  <script type="module" src="/JS/IA.JS" defer></script>
+</head>
+ <!-- toggles CSS-only -->
+  <input type="checkbox" id="navToggle" class="toggle-input" />
+  <input type="checkbox" id="chatToggle" class="toggle-input" />
+
+  <!-- 🔵 Barra superior -->
+  <header class="topbar">
+    <label for="navToggle" class="menu-toggle" aria-label="Abrir menú">☰</label>
+
+    <h1>Educacion Finaciera</h1>
+    <div class="user-info">
+      <span id="userEmail">Cargando...</span>
+      <button id="logoutBtn">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <!-- 🟢 Menú lateral -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-content">
+      <img src="/assets/icono de Bienestar Finaciera.png" alt="Logo UCV" class="sidebar-logo">
+      <nav>
+   <ul> <li><a href="/Html/dashboard.html" >🏠 Dashboard</a></li>
+      <li><a href="/Html/presupuesto.html">💰 Presupuesto y Transacciones</a></li>
+      <li><a href="/Html/educacion.html"class="active">🎓 Educación Financiera</a></li>
+      <li><a href="/Html/metas.html">🎯 Metas</a></li>
+      <li><a href="/Html/inteligentes.html">🧮 Finanzas Inteligentes</a></li>
+      <li><a href="/Html/beneficios.html">🏷 Beneficios</a></li>
+      <li><a href="/Html/asesoria.html">📞 Asesoría</a></li>
+      <li><a href="/Html/perfil.html">⚙️ Configuración</a></li>
+   </ul> </nav>
+    </div>
+  </aside>
+<body>
+  
+</body>
+</html>

@@ -1,0 +1,129 @@
+/* ========================================== */
+/* Metas de Ahorro - UCV Bienestar Financiero */
+/* Responsive optimizado para móviles */
+/* ========================================== */
+
+/* Variables */
+:root{
+  --sidebar-width:260px;
+  --header-h:64px;
+  --bg:#071029;
+  --accent-1:#6EE7B7;
+  --accent-2:#60A5FA;
+  --muted:#9CA3AF;
+  --radius:12px;
+  --shadow:0 10px 30px rgba(2,6,23,0.6);
+  font-family:'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+}
+
+/* Base */
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;padding-top:var(--header-h) -10px;}
+body{
+  background:
+    radial-gradient(900px 400px at 10% 10%, rgba(96,165,250,0.03), transparent 12%),
+    linear-gradient(180deg,var(--bg) 0%, #081026 100%);
+  color:#E6EEF8;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Sidebar */
+.sidebar{
+  position:fixed;left:16px;top:calc(var(--header-h) + 12px);bottom:16px;
+  width:var(--sidebar-width);padding:14px;display:flex;flex-direction:column;gap:14px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+  border-radius:12px;border:1px solid rgba(255,255,255,0.02);
+  box-shadow:var(--shadow);backdrop-filter:blur(6px);z-index:110;overflow:auto;
+}
+.sidebar-logo{width:56px;height:56px;border-radius:10px;object-fit:cover;box-shadow:0 8px 30px rgba(96,165,250,0.06)}
+.sidebar nav ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.sidebar nav a{display:flex;align-items:center;gap:12px;padding:10px;border-radius:10px;color:var(--muted);text-decoration:none;font-weight:600;transition:all .16s}
+.sidebar nav a:hover{color:var(--accent-2);transform:translateX(6px)}
+.sidebar nav a.active{color:var(--accent-2);background:linear-gradient(90deg, rgba(96,165,250,0.06), rgba(110,231,183,0.03));box-shadow: inset 4px 0 0 0 rgba(96,165,250,0.12)}
+
+/* Header */
+.top-header{
+  position:fixed;left:0;right:0;top:0;height:var(--header-h);
+  display:flex;justify-content:space-between;align-items:center;padding:10px 16px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+  border-bottom:1px solid rgba(255,255,255,0.02);backdrop-filter:blur(6px);z-index:120;
+  box-shadow:0 6px 30px rgba(2,6,23,0.55);
+}
+.top-header h1{margin:0;font-size:18px;font-weight:700}
+#modoToggle{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:6px 10px;border-radius:10px;color:var(--muted);cursor:pointer}
+
+/* Main Content */
+main{
+  margin-left:calc(var(--sidebar-width) + 48px);
+  padding:20px 28px 60px 28px;min-height:calc(100vh - var(--header-h));
+  transition:margin .22s ease;
+}
+
+/* Formularios */
+form{
+  display:flex;flex-direction:column;gap:10px;margin-bottom:20px;
+}
+form input, form button{
+  padding:10px;border-radius:10px;border:none;font-size:14px;
+}
+form input{background:rgba(255,255,255,0.02);color:#fff}
+form button{background:var(--accent-2);color:#012;cursor:pointer;transition:all .2s}
+form button:hover{transform:translateY(-2px);background:var(--accent-1)}
+
+/* Resumen */
+.resumen-boxes{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px;
+}
+.resumen-item{
+  background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.02);padding:16px;border-radius:12px;
+  box-shadow:0 8px 28px rgba(2,6,23,0.5);
+}
+.resumen-item p{margin:0;color:var(--muted)}
+.resumen-item h3{margin:8px 0 0;font-size:18px;color:#fff}
+
+/* Lista de metas */
+#listaMetas{
+  display:flex;flex-direction:column;gap:12px;margin-top:10px;
+}
+.meta-item{
+  background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.02);padding:12px;border-radius:12px;
+  cursor:pointer;transition:transform .18s;
+}
+.meta-item:hover{transform:translateY(-2px)}
+
+.barra-progreso{
+  background:rgba(255,255,255,0.02);border-radius:10px;height:16px;width:100%;margin:6px 0;
+}
+.barra-progreso div{
+  height:100%;border-radius:10px;background:var(--accent-1);width:0%;
+  transition:width .3s ease;
+}
+
+/* Vista detalle */
+#vistaDetalle{margin-top:16px}
+#btnRegresar{margin-bottom:10px;padding:6px 12px;border-radius:8px;background:var(--accent-2);border:none;color:#012;cursor:pointer}
+#btnRegresar:hover{background:var(--accent-1)}
+
+/* Footer */
+footer{
+  text-align:center;padding:12px 0;margin-top:40px;color:var(--muted);font-size:13px
+}
+
+/* Mobile-first adjustments */
+@media (max-width:760px){
+  :root{ --header-h:56px; }
+  body{padding-top:var(--header-h);}
+  main{margin-left:16px;padding:16px}
+  .resumen-boxes{grid-template-columns:1fr}
+  #listaMetas{gap:10px}
+  form{gap:8px}
+}
+
+/* Extra narrow phones */
+@media (max-width:420px){
+  .resumen-item h3, form input, form button{font-size:14px;padding:8px}
+  #btnRegresar{padding:5px 10px}
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beneficios y Descuentos - UCV Bienestar Financiero</title>
+
+  <link rel="stylesheet" href="/css/beneficios.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- 🔵 Barra superior -->
+  <header class="topbar">
+    <label for="navToggle" class="menu-toggle">☰</label>
+    <h1>Beneficios y Descuentos</h1>
+    <div class="user-info">
+      <span id="userEmail">Cargando...</span>
+      <button id="logoutBtn">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <!-- 🟢 Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-content">
+      <img src="/assets/icono de Bienestar Finaciera.png" class="sidebar-logo" alt="Logo UCV">
+      <nav>
+        <ul>
+         <li><a href="/Html/dashboard.html">🏠 Dashboard</a></li>
+          <li><a href="/Html/presupuesto.html">💰Presupuesto y Transacciones</a></li>
+          <li><a href="/Html/educacion.html">🎓 Educación Financiera</a></li>
+          <li><a href="/Html/metas.html">🎯 Metas</a></li>
+          <li><a href="/Html/inteligentes.html">🧮 Finanzas Inteligentes</a></li>
+          <li><a href="/Html/beneficios.html"class="active">🏷 Beneficios</a></li>
+          <li><a href="/Html/asesoria.html">📞 Asesoría</a></li>
+          <li><a href="/Html/perfil.html">⚙️ Configuración</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- 🟣 Contenido principal -->
+  <main class="beneficios-content">
+    <section class="titulo">
+      <h2>Beneficios y Descuentos para Estudiantes</h2>
+      <p>Aprovecha los convenios y ofertas exclusivas de la UCV.</p>
+    </section>
+
+    <!-- 🔹 Contenedor de beneficios -->
+    <section id="listaBeneficios" class="lista-beneficios">
+      <!-- JS cargará aquí los beneficios desde Firebase -->
+    </section>
+  </main>
+
+  <!-- JS -->
+  <script type="module" src="/JS/beneficios.js"></script>
+</body>
+</html>

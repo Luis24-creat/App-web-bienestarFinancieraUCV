@@ -1,24 +1,14 @@
-import { 
-  initializeApp 
-} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+// =====================================================
+// 📌 IMPORTS CORREGIDOS (Chart.js + Firebase)
+// =====================================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+import { getFirestore, collection, addDoc, doc, getDoc, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
-import { 
-  getAuth, 
-  onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  query,
-  orderBy,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
 
 // =====================================================
-// 🔥 CONFIG
+// 🔥 CONFIG FIREBASE
 // =====================================================
 const firebaseConfig = {
   apiKey: "AIzaSyDOry-U3lb0m6nLazXT0h_a0doQ9OfOesQ",
@@ -36,10 +26,11 @@ const db = getFirestore(app);
 
 
 // =====================================================
-// 📌 DOM Elements — AHORA COINCIDEN CON TU HTML
+// 📌 DOM Elements
 // =====================================================
 const ingresoDesc = document.getElementById("ingresoDescripcion");
 const ingresoMonto = document.getElementById("ingresoMonto");
+const ingresoOrigen = document.getElementById("ingresoOrigen");
 const btnIngreso = document.getElementById("btnAgregarIngreso");
 
 const gastoDesc = document.getElementById("gastoDescripcion");
@@ -53,74 +44,161 @@ const totalIngresos = document.getElementById("totalIngresos");
 const totalGastos = document.getElementById("totalGastos");
 const balanceRestante = document.getElementById("balanceRestante");
 
+const emailDisplay = document.getElementById("userEmail");
+const logoutBtn = document.getElementById("logoutBtn");
+
+let graficoPresupuesto = null;
+
 
 // =====================================================
-// 📌 Usuario autenticado
+// 📌 Mostrar nombre usuario
 // =====================================================
 let USER_ID = null;
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    window.location.href = "/Html/index.html";
-  } else {
-    USER_ID = user.uid;
-    cargarMovimientos();
+    window.location.href = "index.html";
+    return;
   }
+
+  USER_ID = user.uid;
+
+  const docRef = doc(db, "usuarios", user.uid);
+
+  try {
+    const snap = await getDoc(docRef);
+    if (snap.exists()) {
+      emailDisplay.textContent = `Hola, ${snap.data().nombre}`;
+    } else {
+      emailDisplay.textContent = `Hola, ${user.email}`;
+    }
+  } catch (err) {
+    console.log(err);
+    emailDisplay.textContent = "Hola";
+  }
+
+  cargarMovimientos();
 });
 
 
 // =====================================================
-// 📌 Registrar Ingreso
+// 📌 Cerrar sesión
 // =====================================================
-if (btnIngreso) {
-  btnIngreso.addEventListener("click", async () => {
-    if (!ingresoDesc.value || !ingresoMonto.value) return alert("Completa todos los campos.");
+logoutBtn?.addEventListener("click", () => {
+  signOut(auth).then(() => window.location.href = "/Html/index.html");
+});
 
-    const data = {
-      userId: USER_ID,
-      tipo: "ingreso",
-      monto: parseFloat(ingresoMonto.value),
-      descripcion: ingresoDesc.value,
-      fecha: new Date(),
-      creado: new Date()
-    };
 
+// =====================================================
+// 🔔 NOTIFICACIÓN flotante
+// =====================================================
+function mostrarAnimacionPago(tipo) {
+  const notif = document.getElementById("notificacionPago");
+  const texto = document.getElementById("notificacionTexto");
+
+  if (!notif || !texto) return;
+
+  let mensaje = "Transacción registrada";
+  let icono = "💸";
+
+  if (tipo === "banco") { mensaje = "Depósito bancario"; icono = "🏦"; }
+  if (tipo === "efectivo") { mensaje = "Ingreso en efectivo"; icono = "💵"; }
+  if (tipo === "transferencia") { mensaje = "Transferencia recibida"; icono = "➡️"; }
+
+  texto.textContent = mensaje;
+  const iconNode = notif.querySelector(".notif-icon");
+  if (iconNode) iconNode.textContent = icono;
+
+  // Remover clase de oculto y agregar clase mostrar
+  notif.classList.remove("oculto");
+  notif.classList.add("mostrar");
+
+  clearTimeout(notif._hideTimeout);
+  notif._hideTimeout = setTimeout(() => {
+    notif.classList.remove("mostrar");
+    notif.classList.add("oculto");
+  }, 2200);
+}
+
+
+// =====================================================
+// 📌 Registrar ingreso
+// =====================================================
+btnIngreso?.addEventListener("click", async () => {
+  if (!USER_ID) return alert("Usuario no autenticado");
+
+  if (!ingresoDesc.value || !ingresoMonto.value || parseFloat(ingresoMonto.value) <= 0) {
+    return alert("Completa todos los campos.");
+  }
+
+  const data = {
+    userId: USER_ID,
+    tipo: "ingreso",
+    monto: parseFloat(ingresoMonto.value),
+    descripcion: ingresoDesc.value,
+    fecha: new Date(),
+    creado: new Date()
+  };
+
+  btnIngreso.disabled = true;
+
+  try {
     await addDoc(collection(db, "presupuesto"), data);
+
+    const origen = ingresoOrigen?.value || "ingreso";
+    mostrarAnimacionPago(origen);
 
     ingresoDesc.value = "";
     ingresoMonto.value = "";
+    ingresoOrigen.value = "";
+
     cargarMovimientos();
-  });
-}
+  } catch (e) {
+    console.log("Error:", e);
+    alert("Ocurrió un error.");
+  }
+
+  btnIngreso.disabled = false;
+});
 
 
 // =====================================================
-// 📌 Registrar Gasto
+// 📌 Registrar gasto
 // =====================================================
-if (btnGasto) {
-  btnGasto.addEventListener("click", async () => {
-    if (!gastoDesc.value || !gastoMonto.value) return alert("Completa todos los campos.");
+btnGasto?.addEventListener("click", async () => {
+  if (!USER_ID) return alert("Usuario no autenticado");
 
-    const data = {
-      userId: USER_ID,
-      tipo: "gasto",
-      monto: parseFloat(gastoMonto.value),
-      descripcion: gastoDesc.value,
-      fecha: new Date(),
-      creado: new Date()
-    };
+  if (!gastoDesc.value || !gastoMonto.value || parseFloat(gastoMonto.value) <= 0) {
+    return alert("Completa todos los campos.");
+  }
 
+  const data = {
+    userId: USER_ID,
+    tipo: "gasto",
+    monto: parseFloat(gastoMonto.value),
+    descripcion: gastoDesc.value,
+    fecha: new Date(),
+    creado: new Date()
+  };
+
+  btnGasto.disabled = true;
+
+  try {
     await addDoc(collection(db, "presupuesto"), data);
-
     gastoDesc.value = "";
     gastoMonto.value = "";
     cargarMovimientos();
-  });
-}
+  } catch (e) {
+    console.log("Error:", e);
+    alert("Ocurrió un error.");
+  }
+
+  btnGasto.disabled = false;
+});
 
 
 // =====================================================
-// 📌 Cargar Ingresos y Gastos
+// 📌 Cargar movimientos
 // =====================================================
 async function cargarMovimientos() {
   if (!USER_ID) return;
@@ -131,26 +209,61 @@ async function cargarMovimientos() {
   let totalIng = 0;
   let totalGas = 0;
 
-  const q = query(collection(db, "presupuesto"), orderBy("fecha", "desc"));
-  const snapshot = await getDocs(q);
+  try {
+    const q = query(collection(db, "presupuesto"), orderBy("fecha", "desc"));
+    const snap = await getDocs(q);
 
-  snapshot.forEach((doc) => {
-    const mov = doc.data();
-    if (mov.userId !== USER_ID) return;
+    snap.forEach((d) => {
+      const mov = d.data();
+      if (mov.userId !== USER_ID) return;
 
-    const li = document.createElement("li");
-    li.textContent = `${mov.descripcion} - S/ ${mov.monto.toFixed(2)}`;
+      const li = document.createElement("li");
+      li.textContent = `${mov.descripcion} - S/ ${mov.monto.toFixed(2)}`;
 
-    if (mov.tipo === "ingreso") {
-      listaIngresos.appendChild(li);
-      totalIng += mov.monto;
-    } else {
-      listaGastos.appendChild(li);
-      totalGas += mov.monto;
+      if (mov.tipo === "ingreso") {
+        listaIngresos.appendChild(li);
+        totalIng += mov.monto;
+      } else {
+        listaGastos.appendChild(li);
+        totalGas += mov.monto;
+      }
+    });
+
+    totalIngresos.textContent = `S/ ${totalIng.toFixed(2)}`;
+    totalGastos.textContent = `S/ ${totalGas.toFixed(2)}`;
+    balanceRestante.textContent = `S/ ${(totalIng - totalGas).toFixed(2)}`;
+
+    actualizarGrafico(totalIng, totalGas);
+  } catch (e) {
+    console.log("Error:", e);
+  }
+}
+
+
+// =====================================================
+// 📌 Gráfico
+// =====================================================
+function actualizarGrafico(ing, gas) {
+  const canvas = document.getElementById("graficoPresupuesto");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+
+  if (graficoPresupuesto) graficoPresupuesto.destroy();
+
+  graficoPresupuesto = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["Ingresos", "Gastos"],
+      datasets: [{
+        data: [ing, gas],
+        backgroundColor: ["#4CAF50", "#F44336"],
+        borderRadius: 12
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: { y: { beginAtZero: true } }
     }
   });
-
-  totalIngresos.textContent = `S/ ${totalIng.toFixed(2)}`;
-  totalGastos.textContent = `S/ ${totalGas.toFixed(2)}`;
-  balanceRestante.textContent = `S/ ${(totalIng - totalGas).toFixed(2)}`;
 }

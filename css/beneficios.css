@@ -1,0 +1,105 @@
+/* ========================================== */
+/* Beneficios y Descuentos - UCV Bienestar   */
+/* Responsive optimizado para móviles         */
+/* ========================================== */
+
+/* Variables */
+:root{
+  --sidebar-width:260px;
+  --header-h:64px;
+  --bg:#071029;
+  --accent-1:#6EE7B7;
+  --accent-2:#60A5FA;
+  --muted:#9CA3AF;
+  --radius:12px;
+  --shadow:0 10px 30px rgba(2,6,23,0.6);
+  font-family:'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+}
+
+/* Base */
+*{box-sizing:border-box;}
+html,body{height:100%;margin:0;padding-top:var(--header-h) -10px;}
+body{
+  background:
+    radial-gradient(900px 400px at 10% 10%, rgba(96,165,250,0.03), transparent 12%),
+    linear-gradient(180deg,var(--bg) 0%, #081026 100%);
+  color:#E6EEF8;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Header */
+.topbar{
+  position:fixed;left:0;right:0;top:0;height:var(--header-h);
+  display:flex;justify-content:space-between;align-items:center;padding:10px 16px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+  border-bottom:1px solid rgba(255,255,255,0.02);backdrop-filter:blur(6px);z-index:120;
+  box-shadow:0 6px 30px rgba(2,6,23,0.55);
+}
+.topbar h1{margin:0;font-size:18px;font-weight:700}
+.topbar .user-info{display:flex;gap:8px;align-items:center}
+.topbar #logoutBtn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:6px 10px;border-radius:10px;color:var(--muted);cursor:pointer}
+label.menu-toggle{
+  background:transparent;border:none;color:var(--muted);font-size:20px;padding:8px;border-radius:8px;cursor:pointer;
+}
+
+/* Sidebar */
+.sidebar{
+  position:fixed;left:16px;top:calc(var(--header-h) + 12px);bottom:16px;
+  width:var(--sidebar-width);padding:14px;display:flex;flex-direction:column;gap:14px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+  border-radius:12px;border:1px solid rgba(255,255,255,0.02);
+  box-shadow:var(--shadow);backdrop-filter:blur(6px);z-index:110;overflow:auto;
+}
+.sidebar-logo{width:56px;height:56px;border-radius:10px;object-fit:cover;box-shadow:0 8px 30px rgba(96,165,250,0.06)}
+.sidebar nav ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.sidebar nav a{display:flex;align-items:center;gap:12px;padding:10px;border-radius:10px;color:var(--muted);text-decoration:none;font-weight:600;transition:all .16s}
+.sidebar nav a:hover{color:var(--accent-2);transform:translateX(6px)}
+.sidebar nav a.active{color:var(--accent-2);background:linear-gradient(90deg, rgba(96,165,250,0.06), rgba(110,231,183,0.03));box-shadow: inset 4px 0 0 0 rgba(96,165,250,0.12)}
+
+/* Main content */
+.beneficios-content{
+  margin-left:calc(var(--sidebar-width) + 48px);
+  padding:20px 28px 60px 28px;min-height:calc(100vh - var(--header-h));
+  transition:margin .22s ease;
+}
+
+/* Título sección */
+.titulo h2{margin:0;font-size:20px}
+.titulo p{margin:6px 0 16px;color:var(--muted)}
+
+/* Lista de beneficios */
+.lista-beneficios{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.beneficio-item{
+  background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.02);
+  border-radius:12px;
+  padding:16px;
+  box-shadow:0 8px 28px rgba(2,6,23,0.5);
+  transition:transform .18s;
+}
+.beneficio-item:hover{transform:translateY(-2px)}
+.beneficio-item h3{margin:0;font-size:16px;color:#fff}
+.beneficio-item p{margin:6px 0 0;color:var(--muted);font-size:14px}
+
+/* Footer */
+footer{margin-top:40px;text-align:center;color:var(--muted);font-size:13px}
+
+/* Mobile adjustments */
+@media (max-width:760px){
+  :root{ --header-h:56px; }
+  body{padding-top:var(--header-h);}
+  .beneficios-content{margin-left:16px;padding:16px}
+  .lista-beneficios{grid-template-columns:1fr;gap:12px}
+}
+
+/* Extra narrow phones */
+@media (max-width:420px){
+  .beneficio-item h3{font-size:14px}
+  .beneficio-item p{font-size:13px}
+  .topbar h1{font-size:16px}
+}

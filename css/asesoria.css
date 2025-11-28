@@ -1,0 +1,132 @@
+/* ==============================
+   UCV Bienestar Financiero - Asesoría
+   Responsive CSS
+   ============================== */
+
+/* Variables */
+:root {
+  --sidebar-width: 260px;
+  --header-h: 64px;
+  --bg: #071029;
+  --accent-1: #6EE7B7;
+  --accent-2: #60A5FA;
+  --muted: #9CA3AF;
+  --radius: 12px;
+  --shadow: 0 10px 30px rgba(2,6,23,0.6);
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+}
+
+/* Base */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; padding-top: var(--header-h -12px); background: var(--bg); color: #E6EEF8; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* Header / Usuario */
+.user-info {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  background: rgba(7,16,41,0.95);
+  z-index: 120;
+}
+.user-info #logoutBtn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 6px 10px;
+  border-radius: 10px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  left: 16px;
+  top: calc(var(--header-h) + 12px);
+  bottom: 16px;
+  width: var(--sidebar-width);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: rgba(7,16,41,0.85);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.02);
+  box-shadow: var(--shadow);
+  overflow-y: auto;
+}
+.sidebar-logo { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; }
+.sidebar nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.sidebar nav a { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; color: var(--muted); text-decoration: none; font-weight: 600; transition: all .16s; }
+.sidebar nav a.active, .sidebar nav a:hover { color: var(--accent-2); background: rgba(110,231,183,0.08); }
+
+/* Main content */
+main {
+  margin-left: calc(var(--sidebar-width) + 48px);
+  padding: 20px 28px 60px 28px;
+  min-height: calc(100vh - var(--header-h));
+}
+
+/* Formulario de cita */
+.formulario-cita {
+  background: rgba(255,255,255,0.01);
+  padding: 20px;
+  border-radius: var(--radius);
+  margin-bottom: 30px;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.4);
+}
+.formulario-cita h2 { margin-top: 0; font-size: 20px; }
+.formulario-cita label { display: block; margin: 10px 0 4px; font-weight: 600; }
+.formulario-cita input,
+.formulario-cita textarea,
+.formulario-cita select,
+.formulario-cita button {
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--radius);
+  border: none;
+  margin-bottom: 12px;
+  font-family: inherit;
+}
+.formulario-cita input,
+.formulario-cita textarea { background: rgba(255,255,255,0.02); color: #fff; }
+.formulario-cita button {
+  background: var(--accent-2);
+  color: #012;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Historial de consultas */
+.historial-consultas h2 { margin-top: 0; font-size: 20px; margin-bottom: 10px; }
+.filtros { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+#listaConsultas { list-style: none; padding: 0; margin: 0; }
+#listaConsultas li {
+  background: rgba(255,255,255,0.01);
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 25px rgba(2,6,23,0.3);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Mobile responsive */
+@media (max-width: 760px) {
+  :root{ --header-h:56px; }
+  body{padding-top:var(--header-h);}
+  .sidebar { width: 84%; max-width: 320px; left: -360px; transition: all 0.3s; }
+  .sidebar.open { left: 0; }
+  main { margin-left: 20px; padding: 16px; }
+  .formulario-cita, #listaConsultas li { padding: 16px; }
+}
+@media (max-width: 420px) {
+  .sidebar { width: 92%; }
+  .formulario-cita input, .formulario-cita textarea, .formulario-cita button { font-size: 14px; }
+}
